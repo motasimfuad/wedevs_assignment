@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motasimfuad_wedevs/src/features/authentication/sign_up/views/sign_up_screen.dart';
 import 'package:motasimfuad_wedevs/src/widgets/outlined_input_field.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -38,7 +39,14 @@ class SignInScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return const SignUpScreen();
+                      }),
+                    );
+                  },
                   child: const Text(
                     'Create New Account',
                   ),
