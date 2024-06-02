@@ -11,10 +11,12 @@ class NetworkService {
     bool needToken = false,
     Map<String, dynamic>? headers,
   }) async {
+    final apiToken = CacheService().getToken();
 
     _options.headers = <String, dynamic>{
       'Accept': 'application/json',
       'Content-type': 'application/json',
+      if (needToken) 'Authorization': 'Bearer $apiToken',
     };
 
     if (headers != null) {

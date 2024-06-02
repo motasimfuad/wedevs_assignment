@@ -5,6 +5,7 @@ import 'package:motasimfuad_wedevs/src/features/authentication/sign_in/views/sig
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CacheService().initialize();
   runApp(const MyApp());
 }
 
