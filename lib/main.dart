@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:motasimfuad_wedevs/src/core/cache/cache_service.dart';
 import 'package:motasimfuad_wedevs/src/features/authentication/sign_in/views/sign_in_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
