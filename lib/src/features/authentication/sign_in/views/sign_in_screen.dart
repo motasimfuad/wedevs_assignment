@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motasimfuad_wedevs/src/features/authentication/sign_in/controllers/sign_in_view_controller.dart';
-import 'package:motasimfuad_wedevs/src/features/authentication/sign_up/views/sign_up_screen.dart';
+import 'package:motasimfuad_wedevs/src/routes/app_pages.dart';
 import 'package:motasimfuad_wedevs/src/widgets/outlined_input_field.dart';
 import 'package:motasimfuad_wedevs/src/widgets/primary_button.dart';
 
@@ -56,12 +56,7 @@ class SignInScreen extends GetView<SignInViewController> {
                   const SizedBox(height: 40),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return const SignUpScreen();
-                        }),
-                      );
+                      Get.toNamed(Routes.signup);
                     },
                     child: const Text(
                       'Create New Account',

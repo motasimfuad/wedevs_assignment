@@ -9,6 +9,16 @@ class AuthenticationRepository {
       Api.login,
       data,
     );
+
+    return response.data;
+  }
+
+  Future<dynamic> signUp(Map<String, dynamic> data) async {
+    final response = await _networkService.post(
+      Api.signup,
+      data,
+    );
+
     return response.data;
   }
 }

@@ -20,7 +20,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.signup,
-      page: () => const SignUpScreen(),
+      page: () => SignUpScreen(),
+      binding: AuthenticationBinding(),
     ),
     GetPage(
       name: Routes.products,
