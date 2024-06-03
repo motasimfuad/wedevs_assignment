@@ -30,7 +30,7 @@ class SignInViewController extends GetxController {
       if (signInResponseModel?.token != null) {
         await cacheService.setToken(signInResponseModel!.token!);
       }
-      Get.offAllNamed(Routes.products);
+      Get.offAllNamed(Routes.dashboard);
       _pageStateController(PageState.success);
       _clearControllers();
     } on DioException catch (e) {
