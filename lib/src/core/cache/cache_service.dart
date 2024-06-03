@@ -17,15 +17,15 @@ class CacheService {
   static const _token = "token";
   static const _user = "user";
 
-  String getToken() {
+  String? getToken() {
     return _box.read(_token);
   }
 
   Future<void> setToken(String token) async {
-    await _box.write(token, token);
+    await _box.write(_token, token);
   }
 
-  String getUserResponse() {
+  String? getUserResponse() {
     return _box.read(_user);
   }
 

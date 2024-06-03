@@ -17,6 +17,12 @@ class OutlinedInputField extends StatelessWidget {
         hintText: hintText,
         border: const OutlineInputBorder(),
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Required';
+        }
+        return null;
+      },
     );
   }
 }
