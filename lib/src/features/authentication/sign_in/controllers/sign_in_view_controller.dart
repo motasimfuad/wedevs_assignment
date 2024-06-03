@@ -5,6 +5,7 @@ import 'package:motasimfuad_wedevs/src/core/cache/cache_service.dart';
 import 'package:motasimfuad_wedevs/src/core/page_state/page_state.dart';
 import 'package:motasimfuad_wedevs/src/features/authentication/root/repositories/auth_repository.dart';
 import 'package:motasimfuad_wedevs/src/features/authentication/sign_in/models/sign_in_response_model.dart';
+import 'package:motasimfuad_wedevs/src/routes/app_pages.dart';
 
 class SignInViewController extends GetxController {
   final AuthenticationRepository _authRepository = AuthenticationRepository();
@@ -29,6 +30,7 @@ class SignInViewController extends GetxController {
       if (signInResponseModel?.token != null) {
         await cacheService.setToken(signInResponseModel!.token!);
       }
+      Get.offAllNamed(Routes.products);
       _pageStateController(PageState.success);
       _clearControllers();
     } on DioException catch (e) {
@@ -54,6 +56,7 @@ class SignInViewController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   void _clearControllers() {
+    FocusScope.of(Get.context!).unfocus();
     usernameController.clear();
     passwordController.clear();
   }

@@ -32,4 +32,8 @@ class CacheService {
   void setUserResponse(String userResponse) {
     _box.write(_user, userResponse);
   }
+
+  void clear() {
+    _box.erase();
+  }
 }
