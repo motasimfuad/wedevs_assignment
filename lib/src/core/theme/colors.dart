@@ -9,7 +9,7 @@ class AppColors {
   static const Color grey = Color(0xFF989FA8);
   static const Color darkGrey = Color(0xFF818995);
   static const Color yellow = Color(0xFFF5A623);
-  static const Color pageBackground = Color(0xFFF8F8F8);
+  static const Color pageBackground = Color(0xFFF8F8FA);
 
   /// Gradient
   static const List<Color> primaryGradient = [

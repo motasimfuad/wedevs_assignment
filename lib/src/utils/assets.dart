@@ -15,4 +15,7 @@ class Assets {
   static const String sortBy = "$_root/sort_by.png";
   static const String filters = "$_root/filters.png";
   static const String viewMode = "$_root/view_mode.png";
+  static const String password = "$_root/password.png";
+  static const String notification = "$_root/notification.png";
+  static const String wishlist = "$_root/wishlist.png";
 }

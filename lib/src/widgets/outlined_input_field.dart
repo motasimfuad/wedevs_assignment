@@ -5,9 +5,11 @@ class OutlinedInputField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.controller,
+    this.labelText,
   });
   final String hintText;
   final TextEditingController controller;
+  final String? labelText;
 
   @override
   Widget build(BuildContext context) {

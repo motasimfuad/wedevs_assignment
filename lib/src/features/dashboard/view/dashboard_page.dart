@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
 import 'package:motasimfuad_wedevs/src/features/dashboard/controller/dashboard_view_controller.dart';
 import 'package:motasimfuad_wedevs/src/features/products/view/products_screen.dart';
+import 'package:motasimfuad_wedevs/src/features/profile/views/profile_screen.dart';
 import 'package:motasimfuad_wedevs/src/utils/assets.dart';
 
 class DashboardPage extends GetView<DashboardViewController> {
@@ -14,7 +15,7 @@ class DashboardPage extends GetView<DashboardViewController> {
     Container(),
     const ProductsScreen(),
     Container(),
-    Container(),
+    const ProfileScreen(),
   ];
 
   @override
