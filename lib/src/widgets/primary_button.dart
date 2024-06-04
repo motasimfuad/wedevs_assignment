@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -7,12 +8,16 @@ class PrimaryButton extends StatelessWidget {
     required this.onTap,
     this.isLoading = false,
     this.backgroundColor,
+    this.textColor,
+    this.height,
   }) : super(key: key);
 
   final String? title;
   final Function onTap;
   final bool isLoading;
   final Color? backgroundColor;
+  final Color? textColor;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +28,26 @@ class PrimaryButton extends StatelessWidget {
         ),
         foregroundColor: Colors.white,
         backgroundColor: backgroundColor ?? Colors.deepOrange,
-        minimumSize: const Size(double.infinity, 42),
+        minimumSize: Size(
+          double.infinity,
+          height ?? 42.h,
+        ),
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12.r),
         ),
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 10,
+        padding: EdgeInsets.symmetric(
+          vertical: 10.w,
+          horizontal: 10.w,
         ),
       ),
       onPressed: isLoading ? () {} : () => onTap(),
       child: Builder(builder: (context) {
         if (isLoading) {
-          return const SizedBox(
-            height: 20,
-            width: 20,
-            child: Center(
+          return SizedBox(
+            height: 20.h,
+            width: 20.w,
+            child: const Center(
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
                 color: Colors.deepOrange,
@@ -50,7 +58,13 @@ class PrimaryButton extends StatelessWidget {
         }
 
         if (title != null) {
-          return Text(title ?? '');
+          return Text(
+            title ?? '',
+            style: TextStyle(
+              color: textColor ?? Colors.white,
+              fontSize: 15.sp,
+            ),
+          );
         } else {
           return const SizedBox();
         }

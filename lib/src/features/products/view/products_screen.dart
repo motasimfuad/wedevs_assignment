@@ -35,6 +35,7 @@ class ProductsScreen extends GetView<ProductsViewController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const ProductsFilter(),
             Obx(
               () => Expanded(
                 child: GridView.builder(

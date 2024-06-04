@@ -16,11 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-        useMaterial3: true,
     return ScreenUtilInit(
       useInheritedMediaQuery: true,
       minTextAdapt: true,
@@ -28,6 +23,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(393, 808),
       child: GetMaterialApp(
         title: 'Dokan',
+        theme: themeData,
         getPages: AppPages.pages,
       ),
     );
