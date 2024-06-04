@@ -15,7 +15,7 @@ class DashboardPage extends GetView<DashboardViewController> {
     Container(),
     const ProductsScreen(),
     Container(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   @override

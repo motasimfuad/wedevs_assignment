@@ -13,4 +13,17 @@ class ProfileRepository {
 
     return response.data;
   }
+
+  Future<dynamic> updateProfile({
+    required int? userId,
+    required Map<String, dynamic> body,
+  }) async {
+    final response = await _networkService.post(
+      '${Api.updateProfile}$userId',
+      body,
+      needToken: true,
+    );
+
+    return response.data;
+  }
 }

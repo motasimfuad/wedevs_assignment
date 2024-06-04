@@ -37,10 +37,12 @@ class _UserInfo extends StatelessWidget {
                               color: AppColors.primary,
                             )
                           : CachedNetworkImage(
-                              imageUrl: (controller.userDetails?.avatarUrls !=
-                                      null)
-                                  ? controller.userDetails!.avatarUrls!["96"]!
-                                  : AppConstants.noImagePlaceholder,
+                              imageUrl:
+                                  (controller.userDetails.value?.avatarUrls !=
+                                          null)
+                                      ? controller
+                                          .userDetails.value!.avatarUrls!["96"]!
+                                      : AppConstants.noImagePlaceholder,
                               fit: BoxFit.cover,
                             ),
                     );
@@ -53,7 +55,7 @@ class _UserInfo extends StatelessWidget {
             () => Text(
               (controller.profileIsLoading)
                   ? '...'
-                  : controller.userDetails?.name ?? "Unknown User",
+                  : controller.userDetails.value?.name ?? "Unknown User",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20.sp,
@@ -65,7 +67,7 @@ class _UserInfo extends StatelessWidget {
             () => Text(
               (controller.profileIsLoading)
                   ? '...'
-                  : controller.userDetails?.email ?? "N/A",
+                  : controller.userDetails.value?.email ?? "N/A",
               style: TextStyle(
                 color: AppColors.darkGrey,
                 fontSize: 16.sp,

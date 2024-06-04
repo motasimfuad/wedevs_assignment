@@ -8,11 +8,13 @@ class OutlinedInputField extends StatelessWidget {
     required this.hintText,
     required this.controller,
     this.labelText,
+    this.validator,
     this.isDisabled = false,
   });
   final String hintText;
   final TextEditingController controller;
   final String? labelText;
+  final String? Function(String?)? validator;
   final bool isDisabled;
 
   @override
@@ -77,12 +79,15 @@ class OutlinedInputField extends StatelessWidget {
                 ),
               ),
             ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Required';
-              }
-              return null;
-            },
+            validator: isDisabled
+                ? null
+                : validator ??
+                    (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Required';
+                      }
+                      return null;
+                    },
           ),
         ],
       ),

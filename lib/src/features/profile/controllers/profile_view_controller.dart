@@ -13,7 +13,11 @@ class ProfileViewController extends GetxController {
   final Rx<PageState> _pageStateController = Rx(PageState.initial);
   bool get profileIsLoading => _pageStateController.value == PageState.loading;
 
-  UserModel? userDetails;
+  final Rx<PageState> _updateStateController = Rx(PageState.initial);
+  bool get isProfileUpdating =>
+      _updateStateController.value == PageState.loading;
+
+  Rx<UserModel?> userDetails = (null as UserModel?).obs;
 
   @override
   void onInit() {
@@ -25,7 +29,7 @@ class ProfileViewController extends GetxController {
     _pageStateController(PageState.loading);
     try {
       final response = await _profileRepository.userDetails();
-      userDetails = UserModel.fromJson(response);
+      userDetails.value = UserModel.fromJson(response);
       _cacheService.setUserResponse(response.toString());
       assignFields();
       _pageStateController(PageState.success);
@@ -35,13 +39,48 @@ class ProfileViewController extends GetxController {
         'An error occurred. Please try again.',
         snackPosition: SnackPosition.BOTTOM,
       );
+
       _pageStateController(PageState.error);
     }
   }
 
+  Future<void> updateProfile() async {
+    _updateStateController(PageState.loading);
+    final body = {
+      'name': fullNameController.text,
+      'email': emailController.text,
+    };
+
+    try {
+      final response = await _profileRepository.updateProfile(
+        userId: userDetails.value?.id,
+        body: body,
+      );
+      userDetails.value = UserModel.fromJson(response);
+      _cacheService.setUserResponse(response.toString());
+      assignFields();
+      _updateStateController(PageState.success);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 400) {
+        Get.snackbar(
+          'Error',
+          e.response?.data['message'],
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Profile update failed. Please try again.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+      _updateStateController(PageState.error);
+    }
+  }
+
   void assignFields() {
-    emailController.text = userDetails?.email ?? '';
-    fullNameController.text = userDetails?.name ?? '';
+    emailController.text = userDetails.value?.email ?? '';
+    fullNameController.text = userDetails.value?.name ?? '';
   }
 
   /// Text Editing Controllers

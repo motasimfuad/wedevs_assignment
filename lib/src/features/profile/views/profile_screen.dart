@@ -15,7 +15,9 @@ part '../widgets/profile_section.dart';
 part '../widgets/user_info.dart';
 
 class ProfileScreen extends GetView<ProfileViewController> {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class ProfileScreen extends GetView<ProfileViewController> {
             children: [
               _UserInfo(controller: controller),
               Container(
-                padding: EdgeInsets.all(20.w),
+                padding: EdgeInsets.all(20.w).copyWith(bottom: 100.h),
                 child: Card(
                   elevation: 5,
                   shadowColor: Colors.black.withOpacity(0.2),
@@ -47,75 +49,101 @@ class ProfileScreen extends GetView<ProfileViewController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Obx(
-                          () => ProfileSection(
-                            title: "Account",
-                            icon: Assets.dashboardTab4,
-                            children: (controller.profileIsLoading)
-                                ? [
-                                    SizedBox(
-                                      height: 100.h,
-                                      child: const CupertinoActivityIndicator(),
-                                    )
-                                  ]
-                                : [
-                                    OutlinedInputField(
-                                      labelText: "Email",
-                                      hintText: "youremail@xmail.com",
-                                      controller: controller.emailController,
-                                    ),
-                                    OutlinedInputField(
-                                      labelText: "Full Name",
-                                      hintText: "William Bennett",
-                                      controller: controller.fullNameController,
-                                    ),
-                                    OutlinedInputField(
-                                      labelText: "Street Address",
-                                      hintText: "465 Nolan Causeway Suite 079",
-                                      controller: TextEditingController(),
-                                      isDisabled: true,
-                                    ),
-                                    OutlinedInputField(
-                                      labelText: "Apt, Suite, Bldg (optional)",
-                                      hintText: "Unit 512",
-                                      controller: TextEditingController(),
-                                      isDisabled: true,
-                                    ),
-                                    SizedBox(
-                                      width: 90.w,
-                                      child: OutlinedInputField(
-                                        labelText: "Zip Code",
-                                        hintText: "77017",
+                          () => Form(
+                            key: _formKey,
+                            child: ProfileSection(
+                              title: "Account",
+                              icon: Assets.dashboardTab4,
+                              children: (controller.profileIsLoading)
+                                  ? [
+                                      SizedBox(
+                                        height: 100.h,
+                                        child:
+                                            const CupertinoActivityIndicator(),
+                                      )
+                                    ]
+                                  : [
+                                      OutlinedInputField(
+                                        labelText: "Email",
+                                        hintText: "youremail@xmail.com",
+                                        controller: controller.emailController,
+                                        validator: (val) {
+                                          if (!GetUtils.isEmail(val ?? '')) {
+                                            return "Invalid email";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      OutlinedInputField(
+                                        labelText: "Full Name",
+                                        hintText: "William Bennett",
+                                        controller:
+                                            controller.fullNameController,
+                                      ),
+                                      OutlinedInputField(
+                                        labelText: "Street Address",
+                                        hintText:
+                                            "465 Nolan Causeway Suite 079",
                                         controller: TextEditingController(),
                                         isDisabled: true,
                                       ),
-                                    ),
-                                    SizedBox(height: 24.h),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: PrimaryButton(
-                                            height: 50.h,
-                                            onTap: () {
-                                              Get.back();
-                                            },
-                                            title: "Cancel",
-                                            backgroundColor: Colors.white,
-                                            textColor: AppColors.grey,
-                                            borderColor: Colors.grey.shade300,
-                                          ),
+                                      OutlinedInputField(
+                                        labelText:
+                                            "Apt, Suite, Bldg (optional)",
+                                        hintText: "Unit 512",
+                                        controller: TextEditingController(),
+                                        isDisabled: true,
+                                      ),
+                                      SizedBox(
+                                        width: 90.w,
+                                        child: OutlinedInputField(
+                                          labelText: "Zip Code",
+                                          hintText: "77017",
+                                          controller: TextEditingController(),
+                                          isDisabled: true,
                                         ),
-                                        SizedBox(width: 20.w),
-                                        Expanded(
-                                          child: PrimaryButton(
-                                            height: 50.h,
-                                            onTap: () {},
-                                            title: "Save",
-                                            backgroundColor: AppColors.success,
+                                      ),
+                                      SizedBox(height: 4.h),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: PrimaryButton(
+                                              height: 50.h,
+                                              onTap: () {
+                                                Get.back();
+                                              },
+                                              title: "Cancel",
+                                              backgroundColor: Colors.white,
+                                              textColor: AppColors.grey,
+                                              borderColor: Colors.grey.shade300,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          SizedBox(width: 20.w),
+                                          Obx(
+                                            () => Expanded(
+                                              child: PrimaryButton(
+                                                isLoading: controller
+                                                    .isProfileUpdating,
+                                                height: 50.h,
+                                                onTap: () async {
+                                                  if (!_formKey.currentState!
+                                                      .validate()) {
+                                                    return;
+                                                  }
+
+                                                  return controller
+                                                      .updateProfile();
+                                                },
+                                                title: "Save",
+                                                backgroundColor:
+                                                    AppColors.success,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                            ),
                           ),
                         ),
                         _makeDivider(),
