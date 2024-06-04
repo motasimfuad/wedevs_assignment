@@ -9,6 +9,7 @@ class PrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.backgroundColor,
     this.textColor,
+    this.borderColor,
     this.height,
   }) : super(key: key);
 
@@ -17,6 +18,7 @@ class PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final Color? backgroundColor;
   final Color? textColor;
+  final Color? borderColor;
   final double? height;
 
   @override
@@ -35,6 +37,10 @@ class PrimaryButton extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r),
+          side: BorderSide(
+            color: borderColor ?? Colors.transparent,
+            width: 1.w,
+          ),
         ),
         padding: EdgeInsets.symmetric(
           vertical: 10.w,

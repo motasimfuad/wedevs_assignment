@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motasimfuad_wedevs/src/core/cache/cache_service.dart';
 import 'package:motasimfuad_wedevs/src/core/page_state/page_state.dart';
@@ -26,6 +27,7 @@ class ProfileViewController extends GetxController {
       final response = await _profileRepository.userDetails();
       userDetails = UserModel.fromJson(response);
       _cacheService.setUserResponse(response.toString());
+      assignFields();
       _pageStateController(PageState.success);
     } on DioException {
       Get.snackbar(
@@ -36,4 +38,13 @@ class ProfileViewController extends GetxController {
       _pageStateController(PageState.error);
     }
   }
+
+  void assignFields() {
+    emailController.text = userDetails?.email ?? '';
+    fullNameController.text = userDetails?.name ?? '';
+  }
+
+  /// Text Editing Controllers
+  TextEditingController emailController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
 }

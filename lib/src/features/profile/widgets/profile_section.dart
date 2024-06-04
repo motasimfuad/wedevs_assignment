@@ -34,10 +34,14 @@ class _ProfileSectionState extends State<ProfileSection> {
           horizontal: 20.w,
           vertical: 10.h,
         ),
+        childrenPadding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+          vertical: 10.h,
+        ).copyWith(bottom: 40.h),
         visualDensity: VisualDensity.compact,
         leading: Image.asset(
           widget.icon,
-          height: 20.h,
+          height: 22.h,
           color: AppColors.grey,
         ),
         trailing: Icon(
