@@ -5,6 +5,7 @@ import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
 import 'package:motasimfuad_wedevs/src/features/products/controllers/products_view_controller.dart';
 import 'package:motasimfuad_wedevs/src/features/products/widgets/product_card.dart';
 import 'package:motasimfuad_wedevs/src/utils/assets.dart';
+import 'package:motasimfuad_wedevs/src/utils/enums.dart';
 import 'package:motasimfuad_wedevs/src/widgets/primary_button.dart';
 
 part '../widgets/filters_bottom_sheet.dart';

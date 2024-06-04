@@ -3,10 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
+import 'package:motasimfuad_wedevs/src/features/products/controllers/products_view_controller.dart';
 import 'package:motasimfuad_wedevs/src/features/products/models/product_model.dart';
 import 'package:motasimfuad_wedevs/src/utils/app_constants.dart';
 import 'package:motasimfuad_wedevs/src/utils/assets.dart';
+import 'package:motasimfuad_wedevs/src/utils/enums.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -57,67 +60,86 @@ class ProductCard extends StatelessWidget {
               color: AppColors.grey.withOpacity(0.1),
             ),
             Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                    horizontal: 12.w,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.name ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 10.h,
+                  horizontal: 12.w,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 2.h),
-                      Row(
-                        children: [
-                          Text(
-                            "\$${product.regularPrice}",
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              decoration: TextDecoration.lineThrough,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.normal,
+                    ),
+                    SizedBox(height: 2.h),
+                    Row(
+                      children: [
+                        if (product.regularPrice?.isNotEmpty ?? false)
+                          Container(
+                            margin: EdgeInsets.only(right: 4.w),
+                            child: Text(
+                              "\$${product.regularPrice}",
+                              style: TextStyle(
+                                color: AppColors.grey,
+                                decoration: TextDecoration.lineThrough,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.normal,
+                              ),
                             ),
                           ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            "\$${product.price}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        Text(
+                          "\$${product.price}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      const Spacer(),
-                      RatingBarIndicator(
-                        direction: Axis.horizontal,
-                        rating: product.ratingCount!.toDouble(),
-                        itemCount: 5,
-                        itemSize: 10.h,
-                        itemPadding: EdgeInsets.only(
-                          right: 2.w,
                         ),
-                        itemBuilder: (context, _) {
-                          return Image.asset(
-                            Assets.star,
-                            color: AppColors.yellow,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                )),
+                      ],
+                    ),
+                    const Spacer(),
+                    Obx(
+                      () {
+                        final controller = Get.find<ProductsViewController>();
+                        return (controller.selectedFilter.value ==
+                                ProductFilters.bestSelling)
+                            ? Text(
+                                "${product.totalSales ?? 0} Sold",
+                                style: TextStyle(
+                                  color: AppColors.darkGrey,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              )
+                            : RatingBarIndicator(
+                                direction: Axis.horizontal,
+                                rating: product.ratingCount!.toDouble(),
+                                itemCount: 5,
+                                itemSize: 10.h,
+                                itemPadding: EdgeInsets.only(
+                                  right: 2.w,
+                                ),
+                                itemBuilder: (context, _) {
+                                  return Image.asset(
+                                    Assets.star,
+                                    color: AppColors.yellow,
+                                  );
+                                },
+                              );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

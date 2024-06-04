@@ -1,9 +1,23 @@
 part of '../view/products_screen.dart';
 
-class FiltersBottomSheet extends StatelessWidget {
+class FiltersBottomSheet extends StatefulWidget {
   const FiltersBottomSheet({
     super.key,
   });
+
+  @override
+  State<FiltersBottomSheet> createState() => _FiltersBottomSheetState();
+}
+
+class _FiltersBottomSheetState extends State<FiltersBottomSheet> {
+  final productsController = Get.find<ProductsViewController>();
+  ProductFilters? isSelected;
+
+  @override
+  void initState() {
+    isSelected = productsController.selectedFilter.value;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +46,53 @@ class FiltersBottomSheet extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20.h),
+
+          /// Filters
+          ListView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(
+              top: 10.h,
+              bottom: 20.h,
+            ),
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: ProductFilters.values.length,
+            itemBuilder: (BuildContext context, int index) {
+              final filter = ProductFilters.values[index];
+
+              return ListTileTheme(
+                horizontalTitleGap: 5.w,
+                child: CheckboxListTile(
+                  value: filter == isSelected,
+                  side: BorderSide(
+                    color: AppColors.pink,
+                    width: 1.5.w,
+                  ),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: Text(
+                    filter.title,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  activeColor: AppColors.pink,
+                  checkboxShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  dense: true,
+                  splashRadius: 0,
+                  visualDensity: VisualDensity.compact,
+                  contentPadding: EdgeInsets.zero,
+                  onChanged: (value) {
+                    setState(() {
+                      isSelected = filter;
+                    });
+                  },
+                ),
+              );
+            },
+          ),
           Row(
             children: [
               Expanded(
@@ -46,7 +107,11 @@ class FiltersBottomSheet extends StatelessWidget {
               SizedBox(width: 20.w),
               Expanded(
                 child: PrimaryButton(
-                  onTap: () {},
+                  onTap: () {
+                    Get.back();
+                    productsController.selectedFilter.value = isSelected;
+                    productsController.filterProducts();
+                  },
                   title: "Apply",
                   backgroundColor: AppColors.success,
                   height: 61.h,

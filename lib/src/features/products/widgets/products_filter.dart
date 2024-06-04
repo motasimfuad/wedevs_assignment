@@ -58,22 +58,37 @@ class ProductsFilter extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          TextButton.icon(
-            iconAlignment: IconAlignment.end,
-            onPressed: () {},
-            icon: Image.asset(
-              Assets.sortBy,
-              height: 8.h,
-              color: AppColors.darkGrey,
-            ),
-            label: Text(
-              "Sort by",
-              style: TextStyle(
-                color: AppColors.darkGrey,
-                fontSize: 15.6.w,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
+          Builder(
+            builder: (context) {
+              final controller = Get.find<ProductsViewController>();
+              return Obx(
+                () {
+                  return (controller.selectedFilter.value?.title.isNotEmpty ??
+                          false)
+                      ? TextButton.icon(
+                          iconAlignment: IconAlignment.end,
+                          onPressed: null,
+                          icon: Image.asset(
+                            Assets.sortBy,
+                            height: 8.h,
+                            color: AppColors.darkGrey,
+                          ),
+                          label: Obx(
+                            () => Text(
+                              controller.selectedFilter.value?.title ??
+                                  'Sort By',
+                              style: TextStyle(
+                                color: AppColors.darkGrey,
+                                fontSize: 15.6.w,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox();
+                },
+              );
+            },
           ),
           IconButton(
             icon: Image.asset(
