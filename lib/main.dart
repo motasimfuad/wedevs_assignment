@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:motasimfuad_wedevs/src/core/cache/cache_service.dart';
+import 'package:motasimfuad_wedevs/src/core/theme/theme.dart';
 import 'package:motasimfuad_wedevs/src/routes/app_pages.dart';
 
 void main() async {
@@ -14,15 +16,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Dokan',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
         ),
         useMaterial3: true,
+    return ScreenUtilInit(
+      useInheritedMediaQuery: true,
+      minTextAdapt: true,
+      splitScreenMode: true,
+      designSize: const Size(393, 808),
+      child: GetMaterialApp(
+        title: 'Dokan',
+        getPages: AppPages.pages,
       ),
-      getPages: AppPages.pages,
     );
   }
 }

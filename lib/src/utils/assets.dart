@@ -11,4 +11,8 @@ class Assets {
   static const String dashboardTab4 = "$_root/profile.png";
 
   static const String search = "$_root/search.png";
+  static const String star = "$_root/star.png";
+  static const String sortBy = "$_root/sort_by.png";
+  static const String filters = "$_root/filters.png";
+  static const String viewMode = "$_root/view_mode.png";
 }
