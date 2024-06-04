@@ -32,28 +32,31 @@ class DashboardPage extends GetView<DashboardViewController> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Container(
-            height: 56,
-            width: 56,
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: AppColors.primaryGradient,
-              ),
-            ),
-            child: FloatingActionButton(
-              isExtended: true,
-              elevation: 0,
-              onPressed: () => controller.updateIndex(1),
-              backgroundColor: Colors.transparent,
-              highlightElevation: 0,
-              child: Image.asset(
-                Assets.search,
-                height: 24,
-              ),
-            ),
-          ),
+          floatingActionButton:
+              (MediaQuery.of(context).viewInsets.bottom != 0.0)
+                  ? const Offstage()
+                  : Container(
+                      height: 56,
+                      width: 56,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: AppColors.primaryGradient,
+                        ),
+                      ),
+                      child: FloatingActionButton(
+                        isExtended: true,
+                        elevation: 0,
+                        onPressed: () => controller.updateIndex(1),
+                        backgroundColor: Colors.transparent,
+                        highlightElevation: 0,
+                        child: Image.asset(
+                          Assets.search,
+                          height: 24,
+                        ),
+                      ),
+                    ),
           bottomNavigationBar: Obx(() {
             return Container(
               height: Platform.isAndroid ? 65 : null,
