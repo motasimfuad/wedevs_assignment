@@ -24,6 +24,7 @@ class DashboardPage extends GetView<DashboardViewController> {
         canPop: controller.currentIndex == 0,
         onPopInvoked: _onPopInvoked,
         child: Scaffold(
+          extendBody: true,
           body: IndexedStack(
             index: controller.currentIndex,
             children: _children,
