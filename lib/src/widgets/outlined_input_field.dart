@@ -67,6 +67,7 @@ class _OutlinedInputFieldState extends State<OutlinedInputField> {
             child: TextFormField(
               enabled: !widget.isDisabled,
               controller: widget.controller,
+              textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 filled: widget.backgroundColor != null,
                 fillColor: widget.backgroundColor,
