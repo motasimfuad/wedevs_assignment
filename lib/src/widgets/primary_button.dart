@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -29,7 +30,7 @@ class PrimaryButton extends StatelessWidget {
           color: Colors.white,
         ),
         foregroundColor: Colors.white,
-        backgroundColor: backgroundColor ?? Colors.deepOrange,
+        backgroundColor: backgroundColor ?? AppColors.primary,
         minimumSize: Size(
           double.infinity,
           height ?? 42.h,
@@ -68,7 +69,7 @@ class PrimaryButton extends StatelessWidget {
             title ?? '',
             style: TextStyle(
               color: textColor ?? Colors.white,
-              fontSize: 15.sp,
+              fontSize: 16.sp,
             ),
           );
         } else {

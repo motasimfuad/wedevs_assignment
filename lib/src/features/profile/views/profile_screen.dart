@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:motasimfuad_wedevs/src/core/cache/cache_service.dart';
 import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
 import 'package:motasimfuad_wedevs/src/features/profile/controllers/profile_view_controller.dart';
+import 'package:motasimfuad_wedevs/src/routes/app_pages.dart';
 import 'package:motasimfuad_wedevs/src/utils/app_constants.dart';
 import 'package:motasimfuad_wedevs/src/utils/assets.dart';
 import 'package:motasimfuad_wedevs/src/widgets/outlined_input_field.dart';
@@ -22,8 +24,10 @@ class ProfileScreen extends GetView<ProfileViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.pageBackgroundLighter,
       appBar: AppBar(
         title: const Text("My Account"),
+        backgroundColor: AppColors.pageBackgroundLighter,
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -147,10 +151,21 @@ class ProfileScreen extends GetView<ProfileViewController> {
                           ),
                         ),
                         _makeDivider(),
-                        const ProfileSection(
+                        ProfileSection(
                           title: "Passwords",
                           icon: Assets.password,
-                          children: [],
+                          children: [
+                            SizedBox(
+                              width: 120.w,
+                              child: PrimaryButton(
+                                onTap: () {
+                                  CacheService().clear();
+                                  Get.offAllNamed(Routes.initial);
+                                },
+                                title: "Logout",
+                              ),
+                            ),
+                          ],
                         ),
                         _makeDivider(),
                         const ProfileSection(

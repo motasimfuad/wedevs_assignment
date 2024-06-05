@@ -18,4 +18,6 @@ class Assets {
   static const String password = "$_root/password.png";
   static const String notification = "$_root/notification.png";
   static const String wishlist = "$_root/wishlist.png";
+  static const String google = "$_root/google.png";
+  static const String fb = "$_root/fb.png";
 }
