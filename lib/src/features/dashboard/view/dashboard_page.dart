@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
 import 'package:motasimfuad_wedevs/src/features/dashboard/controller/dashboard_view_controller.dart';
@@ -12,9 +13,19 @@ class DashboardPage extends GetView<DashboardViewController> {
   const DashboardPage({Key? key}) : super(key: key);
 
   static final List<Widget> _children = [
-    Container(),
+    Center(
+      child: Image.asset(
+        Assets.logo,
+        width: 140.w,
+      ),
+    ),
     const ProductsScreen(),
-    Container(),
+    Center(
+      child: Image.asset(
+        Assets.logo,
+        width: 140.w,
+      ),
+    ),
     ProfileScreen(),
   ];
 
