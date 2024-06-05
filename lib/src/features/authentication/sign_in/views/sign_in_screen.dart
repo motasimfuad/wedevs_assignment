@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:motasimfuad_wedevs/src/core/theme/colors.dart';
 import 'package:motasimfuad_wedevs/src/features/authentication/root/widgets/social_login_buttons.dart';
 import 'package:motasimfuad_wedevs/src/features/authentication/sign_in/controllers/sign_in_view_controller.dart';
 import 'package:motasimfuad_wedevs/src/routes/app_pages.dart';
@@ -27,7 +26,6 @@ class SignInScreen extends GetView<SignInViewController> {
               Image.asset(
                 Assets.logo,
                 width: 161.w,
-                // height: 100.h,
               ),
               SizedBox(height: 80.h),
               Text(
@@ -70,7 +68,6 @@ class SignInScreen extends GetView<SignInViewController> {
                 () => PrimaryButton(
                   title: 'Login',
                   height: 61.h,
-                  backgroundColor: AppColors.primary,
                   isLoading: controller.isLoading,
                   onTap: () {
                     if (!_formKey.currentState!.validate()) {
