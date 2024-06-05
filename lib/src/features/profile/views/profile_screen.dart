@@ -85,6 +85,18 @@ class ProfileScreen extends GetView<ProfileViewController> {
                                             controller.fullNameController,
                                       ),
                                       OutlinedInputField(
+                                        labelText: "First Name",
+                                        hintText: "First Name",
+                                        controller:
+                                            controller.firstNameController,
+                                      ),
+                                      OutlinedInputField(
+                                        labelText: "Last Name",
+                                        hintText: "Last Name",
+                                        controller:
+                                            controller.lastNameController,
+                                      ),
+                                      OutlinedInputField(
                                         labelText: "Street Address",
                                         hintText:
                                             "465 Nolan Causeway Suite 079",

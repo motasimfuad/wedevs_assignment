@@ -49,6 +49,8 @@ class ProfileViewController extends GetxController {
     final body = {
       'name': fullNameController.text,
       'email': emailController.text,
+      'first_name': firstNameController.text,
+      'last_name': lastNameController.text,
     };
 
     try {
@@ -81,9 +83,13 @@ class ProfileViewController extends GetxController {
   void assignFields() {
     emailController.text = userDetails.value?.email ?? '';
     fullNameController.text = userDetails.value?.name ?? '';
+    firstNameController.text = userDetails.value?.firstName ?? '';
+    lastNameController.text = userDetails.value?.lastName ?? '';
   }
 
   /// Text Editing Controllers
   TextEditingController emailController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 }
