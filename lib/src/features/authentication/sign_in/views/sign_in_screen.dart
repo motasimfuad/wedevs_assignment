@@ -72,6 +72,8 @@ class SignInScreen extends GetView<SignInViewController> {
                   onTap: () {
                     if (!_formKey.currentState!.validate()) {
                       return;
+                    } else {
+                      _formKey.currentState!.save();
                     }
 
                     controller.signIn();

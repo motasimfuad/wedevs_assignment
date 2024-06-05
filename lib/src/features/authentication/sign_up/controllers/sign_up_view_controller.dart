@@ -34,7 +34,7 @@ class SignUpViewController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
         );
       }
-      Get.offAllNamed(Routes.login);
+      Get.offNamed(Routes.login);
       _pageStateController(PageState.success);
       _clearControllers();
     } on DioException catch (e) {
